@@ -1,0 +1,1154 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 머니메이트 | 나만의 금융 성장 파트너</title>
+<style>
+:root{
+  --primary:#6955eb;--dark:#4d3bc4;--light:#f0edff;
+  --pink:#ff79a9;--ink:#243047;--muted:#78859a;
+  --bg:#f6f7fc;--line:#e5e8f2;--green:#159c79;
+  --red:#e34d69;--gold:#d59617;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Malgun Gothic",Arial,sans-serif;
+  line-height:1.55;
+}
+button,input,select{font:inherit}
+button{cursor:pointer;transition:.2s}
+button:hover:not(:disabled){filter:brightness(.96)}
+button:active{transform:scale(.98)}
+button:disabled{opacity:.55;cursor:not-allowed}
+button:focus-visible,input:focus-visible{
+  outline:3px solid #aa9aff;outline-offset:2px;
+}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.header{
+  max-width:1100px;margin:auto;padding:19px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-size:22px;font-weight:900;color:var(--primary)}
+.tag{
+  font-size:12px;background:var(--light);color:var(--primary);
+  padding:7px 11px;border-radius:25px;font-weight:800;
+}
+main{max-width:1100px;margin:auto;padding:27px 17px 65px}
+h1{font-size:29px;letter-spacing:-1px;margin:0}
+h2{font-size:19px;letter-spacing:-.4px;margin:0 0 6px}
+h3{font-size:16px;margin:0 0 8px}
+p{margin:6px 0}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.intro{margin-bottom:23px}
+.intro p{color:var(--muted)}
+.hero{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:18px;margin-bottom:18px;
+}
+.balance{
+  background:linear-gradient(125deg,#7158ed,#9679f6);
+  border-radius:20px;color:white;padding:27px;
+  min-height:220px;position:relative;overflow:hidden;
+}
+.balance:after{
+  content:"";position:absolute;width:220px;height:220px;
+  border:40px solid #ffffff10;border-radius:50%;
+  right:-95px;top:-110px;pointer-events:none;
+}
+.big-number{
+  font-size:clamp(29px,4vw,41px);font-weight:900;
+  margin:14px 0 18px;overflow-wrap:anywhere;
+}
+.hero-stats{display:flex;gap:13px;flex-wrap:wrap}
+.hero-stats div{
+  background:#ffffff24;border-radius:11px;
+  padding:10px 13px;font-size:12px;
+}
+.hero-stats strong{display:block;font-size:17px}
+.character{
+  background:linear-gradient(135deg,#fff,#fff0f7);
+  border:1px solid #f2dfea;border-radius:20px;
+  padding:24px;text-align:center;
+}
+.character-face{
+  font-size:85px;line-height:1.25;
+  animation:float 2.5s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-8px)}}
+.character-name{font-size:19px;font-weight:900;color:var(--primary)}
+.level{font-size:12px;color:var(--muted);margin:7px 0}
+.grid{
+  display:grid;grid-template-columns:1.1fr .9fr;
+  gap:18px;
+}
+.stack{display:flex;flex-direction:column;gap:18px}
+.card{
+  background:white;border:1px solid var(--line);
+  border-radius:18px;padding:24px;
+  box-shadow:0 5px 20px #1f30500a;
+}
+.card-sub{font-size:12px;color:var(--muted);margin:0 0 20px}
+.field{margin:15px 0}
+label{display:block;font-weight:800;font-size:13px;margin-bottom:7px}
+input,select{
+  width:100%;padding:12px 13px;
+  border:1px solid #d9e0ec;background:white;
+  border-radius:11px;min-width:0;color:var(--ink);
+}
+input:focus,select:focus{border-color:var(--primary);outline:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.primary{
+  width:100%;border:0;border-radius:12px;
+  background:var(--primary);color:white;
+  padding:14px 17px;font-weight:850;
+}
+.secondary{
+  border:1px solid #d7d5ed;background:white;
+  color:var(--primary);border-radius:10px;
+  padding:10px 14px;font-size:13px;font-weight:800;
+}
+.progress{
+  height:12px;background:#e9e7f4;border-radius:20px;
+  overflow:hidden;margin:12px 0;
+}
+.progress>div{
+  height:100%;width:0;
+  background:linear-gradient(90deg,#7158ed,#f49bc2);
+  border-radius:20px;transition:width .4s;
+}
+.progress.green>div{background:var(--green)}
+.category-row{margin:16px 0}
+.row-heading{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:10px;font-size:13px;
+}
+.row-heading strong{white-space:nowrap}
+.track{
+  height:9px;background:#eef0f7;border-radius:20px;
+  overflow:hidden;margin-top:7px;
+}
+.track div{
+  height:100%;background:var(--primary);
+  border-radius:20px;
+}
+.tip{
+  padding:15px;border-radius:12px;background:#f5f2ff;
+  margin:10px 0;font-size:13px;
+}
+.tip strong{display:block;margin-bottom:4px}
+.tip p{color:#6b6685;font-size:12px}
+.alert{
+  border-left:4px solid var(--red);
+  background:#fff0f3;border-radius:9px;
+  padding:13px;margin:10px 0;font-size:13px;
+}
+.alert.good{
+  background:#e9f9f3;border-color:var(--green);
+}
+.mission{
+  background:linear-gradient(135deg,#f4efff,#fff1f6);
+  border:1px solid #e8dffa;padding:20px;border-radius:16px;
+}
+.mission h3{font-size:18px}
+.mission .reward{
+  display:inline-block;background:#fff;
+  border-radius:20px;padding:5px 11px;
+  color:#b78316;font-size:12px;font-weight:900;
+}
+.mission p{font-size:13px;color:#655d85;margin:12px 0}
+.mission-success{
+  color:var(--green);font-weight:900;font-size:14px;
+}
+.goal-amount{
+  text-align:center;font-size:25px;
+  color:var(--primary);font-weight:900;margin:12px 0;
+}
+.badge{
+  display:inline-block;background:#fff4d8;color:#9e7216;
+  border-radius:25px;padding:7px 12px;
+  font-weight:800;font-size:12px;margin:4px;
+}
+.error{font-size:12px;color:var(--red);min-height:16px;margin:6px 0}
+.chat-box{
+  background:#f7f8fc;border:1px solid var(--line);
+  border-radius:13px;padding:15px;
+  height:225px;overflow:auto;margin:15px 0;
+}
+.bubble{
+  max-width:92%;width:fit-content;background:white;
+  border:1px solid var(--line);border-radius:12px;
+  padding:10px 13px;margin:9px 0;font-size:13px;
+  overflow-wrap:anywhere;white-space:pre-wrap;
+}
+.bubble.mine{
+  margin-left:auto;background:var(--primary);
+  color:white;border-color:var(--primary);
+}
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1}
+.chat-input button{
+  background:var(--primary);color:white;border:0;
+  border-radius:10px;padding:10px 17px;font-weight:800;
+}
+.suggestions{display:flex;flex-wrap:wrap;gap:6px}
+.suggestions button{
+  border:1px solid #d9d5f7;background:#f5f2ff;
+  color:#5744ba;border-radius:20px;padding:6px 10px;
+  font-size:11px;
+}
+.row-controls{
+  display:grid;grid-template-columns:1fr 125px;
+  align-items:center;gap:12px;padding:10px 0;
+  border-bottom:1px solid #edf0f5;
+}
+.row-controls:last-child{border:0}
+.row-controls span{font-size:13px;font-weight:700}
+.row-controls input{text-align:right}
+.pop{
+  position:fixed;inset:0;background:#1e194777;
+  z-index:20;display:none;align-items:center;
+  justify-content:center;padding:20px;
+}
+.pop.show{display:flex}
+.pop-card{
+  width:100%;max-width:400px;text-align:center;
+  background:white;padding:30px 25px;border-radius:23px;
+  animation:appear .3s ease;
+}
+.pop-emoji{font-size:66px}
+.pop h2{font-size:26px}
+.pop p{font-size:14px;color:var(--muted);margin:14px 0}
+.notice{font-size:12px;color:var(--muted);text-align:center;margin-top:25px}
+@media(max-width:800px){
+  .hero,.grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  main{padding:20px 12px 40px}
+  .card{padding:18px}
+  .two{grid-template-columns:1fr;gap:0}
+  .header .logo{font-size:18px}
+  .row-controls{grid-template-columns:1fr 115px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header">
+    <div class="logo">💜 AI 머니메이트</div>
+    <div class="tag">나만의 금융 성장 파트너</div>
+  </div>
+</header>
+
+<main>
+  <div class="intro">
+    <h1>안녕! 오늘도 돈 관리하러 왔구나 👋</h1>
+    <p>나만의 금융 코치와 함께 똑똑하게 소비하고 저축해 봐요.</p>
+  </div>
+
+  <div class="hero">
+    <div class="balance">
+      <div>💰 이번 달 예상 저축 여력</div>
+      <div class="big-number" id="availableMoney">700,000원</div>
+      <div class="hero-stats">
+        <div>월 소득<strong id="incomeDisplay">250만 원</strong></div>
+        <div>월 지출<strong id="spendDisplay">180만 원</strong></div>
+        <div>획득 포인트<strong id="pointsDisplay">0 P</strong></div>
+      </div>
+    </div>
+
+    <div class="character">
+      <div class="character-face" id="character">🥚</div>
+      <div class="character-name" id="characterName">새싹 머니메이트</div>
+      <div class="level" id="characterLevel">LEVEL 1</div>
+      <div class="progress"><div id="characterBar"></div></div>
+      <div class="small muted" id="characterMessage">
+        절약 미션에 성공하면 나도 성장해!
+      </div>
+      <div id="badges"></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="stack">
+      <!-- 금융 정보 -->
+      <section class="card">
+        <h2>📝 나의 금융 정보</h2>
+        <p class="card-sub">
+          소득과 소비 계획을 입력하면 맞춤 분석이 시작됩니다.
+        </p>
+
+        <div class="two">
+          <div class="field">
+            <label for="income">월 소득 (원)</label>
+            <input id="income" type="number" min="0"
+                   step="1000" value="2500000">
+          </div>
+          <div class="field">
+            <label for="budget">월 소비 예산 (원)</label>
+            <input id="budget" type="number" min="1"
+                   step="1000" value="1800000">
+          </div>
+        </div>
+
+        <h3>이번 달 소비 항목별 금액</h3>
+        <p class="small muted">
+          카드·계좌 지출을 항목별로 직접 입력하는 시연 방식입니다.
+        </p>
+        <div id="expenseInputs"></div>
+
+        <div class="field">
+          <label for="goalName">저축 목표 이름</label>
+          <input id="goalName" maxlength="30"
+                 value="여행자금">
+        </div>
+
+        <div class="field">
+          <label for="goalTarget">목표 금액 (원)</label>
+          <input id="goalTarget" type="number"
+                 min="1" step="1000" value="1000000">
+        </div>
+
+        <button class="primary" onclick="analyze()">
+          ✨ AI 소비 분석하기
+        </button>
+        <div class="error" id="inputError" role="alert"></div>
+      </section>
+
+      <!-- 소비 그래프 -->
+      <section class="card">
+        <h2>📊 나의 소비 패턴 분석</h2>
+        <p class="card-sub">
+          어떤 항목에 돈을 많이 쓰고 있을까요?
+        </p>
+        <div id="chart"></div>
+        <div class="tip" id="analysisSummary">
+          소비 분석 버튼을 눌러 결과를 확인하세요.
+        </div>
+      </section>
+
+      <!-- 절약 미션 -->
+      <section class="card">
+        <h2>🎯 나만의 절약 챌린지</h2>
+        <p class="card-sub">
+          오늘의 소비를 바꾸면 내일의 자산이 달라져요.
+        </p>
+        <div class="mission">
+          <span class="reward">🏆 성공 보상 +200 P</span>
+          <h3 style="margin-top:13px">🍕 배달음식 2만 원 줄이기!</h3>
+          <p id="missionDesc">
+            배달음식 지출 목표를 2만 원 줄여 보세요.
+          </p>
+          <div class="progress green">
+            <div id="missionBar"></div>
+          </div>
+          <div class="small muted" id="missionStatus"></div>
+          <div style="height:15px"></div>
+          <button class="primary" id="missionButton"
+                  onclick="completeMission()">
+            ✅ 절약 미션 완료하기
+          </button>
+        </div>
+      </section>
+
+      <!-- 금융 알림 -->
+      <section class="card">
+        <h2>🔔 나의 소비 관리 알림</h2>
+        <p class="card-sub">
+          예산과 소비 습관을 살펴보고 알려드려요.
+        </p>
+        <div id="alerts"></div>
+      </section>
+    </div>
+
+    <div class="stack">
+      <!-- 저축 계획 -->
+      <section class="card">
+        <h2>🏖️ 나의 저축 목표</h2>
+        <p class="card-sub">
+          조금씩 모아서 원하는 목표를 달성해 봐요!
+        </p>
+
+        <h3 id="goalTitle" style="text-align:center">여행자금 모으기</h3>
+        <div class="goal-amount" id="goalMoney">0원 / 1,000,000원</div>
+        <div class="progress"><div id="goalBar"></div></div>
+        <div class="small muted" id="goalPercent"
+             style="text-align:center">0% 달성</div>
+
+        <div class="tip">
+          <strong>💡 추천 월 저축액</strong>
+          <div id="savingSuggestion">분석을 시작해 보세요.</div>
+        </div>
+
+        <div class="field">
+          <label for="deposit">저축할 금액 (원)</label>
+          <input id="deposit" type="number" min="1"
+                 step="1000" placeholder="예: 100000">
+        </div>
+        <button class="primary" onclick="addSaving()">
+          💰 가상 저축하기
+        </button>
+        <div class="error" id="savingError" role="alert"></div>
+        <p class="small muted">
+          시뮬레이션용 저축이며 실제 은행으로 돈이 이동하지 않습니다.
+        </p>
+      </section>
+
+      <!-- 맞춤 금융 코칭 -->
+      <section class="card">
+        <h2>🤖 나만의 금융 코치</h2>
+        <p class="card-sub">
+          소비 패턴을 바탕으로 절약 방법을 추천합니다.
+        </p>
+        <div id="tips"></div>
+      </section>
+
+      <!-- 금융 질문 -->
+      <section class="card">
+        <h2>💬 머니메이트에게 물어봐!</h2>
+        <p class="card-sub">
+          저축이나 소비가 궁금하다면 질문해 보세요.
+        </p>
+
+        <div class="chat-box" id="chat" role="log"
+             aria-live="polite">
+          <div class="bubble">
+            안녕! 나는 머니메이트야 💜
+            저축, 예산, 소비 습관에 대해 물어봐!
+          </div>
+        </div>
+
+        <div class="suggestions">
+          <button onclick="ask('얼마나 저축하면 좋을까?')">
+            💰 얼마나 저축할까?
+          </button>
+          <button onclick="ask('배달음식 지출을 줄이고 싶어')">
+            🍕 배달비 줄이기
+          </button>
+          <button onclick="ask('예산을 초과했어')">
+            📊 예산 초과
+          </button>
+        </div>
+
+        <div class="chat-input" style="margin-top:13px">
+          <input id="question" maxlength="150"
+                 placeholder="궁금한 것을 입력하세요"
+                 aria-label="금융 질문">
+          <button onclick="sendQuestion()">전송</button>
+        </div>
+        <p class="small muted">
+          질문 답변은 외부 AI가 아닌 규칙 기반 교육용 코칭입니다.
+        </p>
+      </section>
+
+      <button class="secondary" onclick="resetDemo()">
+        🔄 시연 데이터 초기화
+      </button>
+    </div>
+  </div>
+
+  <p class="notice">
+    AI 머니메이트는 금융 교육용 시뮬레이션입니다.
+    실제 계좌·마이데이터·AI 서버와 연결되지 않으며,
+    절약액은 입력한 소비 계획을 기준으로 한 추정치입니다.
+  </p>
+</main>
+
+<div class="pop" id="popup">
+  <div class="pop-card" role="dialog" aria-modal="true"
+       aria-labelledby="popupTitle">
+    <div class="pop-emoji" id="popupEmoji">🎉</div>
+    <h2 id="popupTitle"></h2>
+    <p id="popupMessage"></p>
+    <button class="primary" onclick="closePopup()">
+      좋아요!
+    </button>
+  </div>
+</div>
+
+<script>
+// AI 머니메이트 - 교육용 금융 시뮬레이터
+// 외부 API, 라이브러리, 서버, 데이터베이스 없음.
+
+const $ = id => document.getElementById(id);
+const KEY = "ai_moneymate_demo_v1";
+
+const categoryInfo = [
+  ["housing","🏠 주거·생활비"],
+  ["food","🍚 식비"],
+  ["delivery","🍕 배달음식"],
+  ["cafe","☕ 카페·간식"],
+  ["shopping","🛍️ 쇼핑"],
+  ["transport","🚌 교통비"],
+  ["other","📦 기타"]
+];
+
+const defaults = {
+  income:2500000,
+  budget:1800000,
+  expenses:{
+    housing:400000,
+    food:350000,
+    delivery:200000,
+    cafe:180000,
+    shopping:170000,
+    transport:200000,
+    other:300000
+  },
+  goalName:"여행자금",
+  goalTarget:1000000,
+  saved:0,
+  points:0,
+  missionDone:false
+};
+
+function cloneDefaults(){
+  return JSON.parse(JSON.stringify(defaults));
+}
+
+let data=cloneDefaults();
+
+try{
+  const saved=JSON.parse(localStorage.getItem(KEY));
+  if(saved && typeof saved==="object" &&
+     Number.isFinite(saved.income) &&
+     Number.isFinite(saved.budget) &&
+     saved.expenses &&
+     categoryInfo.every(([id])=>
+       Number.isFinite(saved.expenses[id]) &&
+       saved.expenses[id]>=0) &&
+     Number.isFinite(saved.goalTarget) &&
+     saved.goalTarget>0 &&
+     Number.isFinite(saved.saved) &&
+     saved.saved>=0 &&
+     Number.isFinite(saved.points) &&
+     typeof saved.missionDone==="boolean" &&
+     typeof saved.goalName==="string"){
+    data=saved;
+  }
+}catch(e){}
+
+function won(n){
+  return Math.round(n).toLocaleString("ko-KR")+"원";
+}
+
+function shortWon(n){
+  return (n/10000).toLocaleString("ko-KR",{
+    maximumFractionDigits:1
+  })+"만 원";
+}
+
+function pct(n){
+  return Math.max(0,Math.min(100,n));
+}
+
+function totalSpent(){
+  return Object.values(data.expenses)
+    .reduce((sum,n)=>sum+n,0);
+}
+
+function surplus(){
+  return Math.max(0,data.income-totalSpent());
+}
+
+function remaining(){
+  return Math.max(0,surplus()-data.saved);
+}
+
+function store(){
+  try{
+    localStorage.setItem(KEY,JSON.stringify(data));
+  }catch(e){}
+}
+
+function createInputs(){
+  const box=$("expenseInputs");
+  box.innerHTML="";
+
+  categoryInfo.forEach(([id,name])=>{
+    const row=document.createElement("div");
+    row.className="row-controls";
+
+    const label=document.createElement("label");
+    label.htmlFor="exp_"+id;
+    label.textContent=name;
+    label.style.margin="0";
+
+    const input=document.createElement("input");
+    input.type="number";
+    input.id="exp_"+id;
+    input.min="0";
+    input.step="1000";
+
+    row.append(label,input);
+    box.appendChild(row);
+  });
+}
+
+function loadInputs(){
+  $("income").value=data.income;
+  $("budget").value=data.budget;
+  $("goalName").value=data.goalName;
+  $("goalTarget").value=data.goalTarget;
+
+  categoryInfo.forEach(([id])=>{
+    $("exp_"+id).value=data.expenses[id];
+  });
+}
+
+function readMoney(id,allowZero){
+  const raw=$(id).value.trim();
+  if(!raw)return NaN;
+  const n=Number(raw);
+  if(!Number.isSafeInteger(n))return NaN;
+  if(allowZero ? n<0 : n<=0)return NaN;
+  return n;
+}
+
+function readInputs(){
+  const income=readMoney("income",true);
+  const budget=readMoney("budget",false);
+  const goalTarget=readMoney("goalTarget",false);
+  const goalName=$("goalName").value.trim();
+  const expenses={};
+
+  for(const [id] of categoryInfo){
+    expenses[id]=readMoney("exp_"+id,true);
+  }
+
+  const values=Object.values(expenses);
+
+  if(!Number.isFinite(income) ||
+     !Number.isFinite(budget) ||
+     !Number.isFinite(goalTarget) ||
+     !goalName ||
+     values.some(n=>!Number.isFinite(n))){
+    $("inputError").textContent=
+      "모든 금액을 올바르게 입력해 주세요. 지출은 0원부터 가능합니다.";
+    return false;
+  }
+
+  const total=values.reduce((sum,n)=>sum+n,0);
+
+  if(!Number.isSafeInteger(total)){
+    $("inputError").textContent=
+      "입력 금액이 너무 큽니다. 금액을 줄여 주세요.";
+    return false;
+  }
+
+  if(goalTarget<data.saved){
+    $("inputError").textContent=
+      "목표 금액은 이미 저축한 금액보다 작게 설정할 수 없습니다.";
+    return false;
+  }
+
+  const newSurplus=Math.max(0,income-total);
+
+  if(data.saved>newSurplus){
+    $("inputError").textContent=
+      "현재 기록된 가상 저축액이 변경한 소득·지출의 여유 금액보다 큽니다. "+
+      "계획을 조정하거나 시연 데이터를 초기화해 주세요.";
+    return false;
+  }
+
+  $("inputError").textContent="";
+
+  data.income=income;
+  data.budget=budget;
+  data.goalTarget=goalTarget;
+  data.goalName=goalName;
+  data.expenses=expenses;
+
+  return true;
+}
+
+function analyze(){
+  if(!readInputs())return;
+
+  store();
+  renderAll();
+  openPopup(
+    "📊",
+    "소비 분석 완료!",
+    "소비 비율과 예상 절약액, 맞춤형 저축 계획을 확인해 보세요."
+  );
+}
+
+function renderAll(){
+  renderDashboard();
+  renderChart();
+  renderMission();
+  renderGoal();
+  renderCoach();
+  renderAlerts();
+  renderCharacter();
+}
+
+function renderDashboard(){
+  const spent=totalSpent();
+
+  $("availableMoney").textContent=won(remaining());
+  $("incomeDisplay").textContent=shortWon(data.income);
+  $("spendDisplay").textContent=shortWon(spent);
+  $("pointsDisplay").textContent=data.points+" P";
+}
+
+function renderChart(){
+  const box=$("chart");
+  box.innerHTML="";
+
+  const total=totalSpent();
+
+  categoryInfo.forEach(([id,name])=>{
+    const amount=data.expenses[id];
+    const percent=total>0?amount/total*100:0;
+
+    const row=document.createElement("div");
+    row.className="category-row";
+
+    const heading=document.createElement("div");
+    heading.className="row-heading";
+
+    const label=document.createElement("span");
+    label.textContent=name;
+
+    const value=document.createElement("strong");
+    value.textContent=won(amount)+" ("+percent.toFixed(1)+"%)";
+
+    heading.append(label,value);
+
+    const track=document.createElement("div");
+    track.className="track";
+
+    const fill=document.createElement("div");
+    fill.style.width=pct(percent)+"%";
+
+    track.appendChild(fill);
+    row.append(heading,track);
+    box.appendChild(row);
+  });
+
+  const flexible=data.expenses.delivery+
+                 data.expenses.cafe+
+                 data.expenses.shopping;
+
+  // 교육용 절약 시나리오:
+  // 배달 10%, 카페 20%, 쇼핑 15% 감축 가정
+  const saving=Math.round((
+    data.expenses.delivery*.10+
+    data.expenses.cafe*.20+
+    data.expenses.shopping*.15
+  )/1000)*1000;
+
+  const summary=$("analysisSummary");
+  summary.textContent=
+    "💡 총 지출 "+won(total)+" 중 배달·카페·쇼핑 지출은 "+
+    won(flexible)+"입니다. 이 항목을 일부 줄이면 "+
+    "월 약 "+won(saving)+"을 추가로 저축할 수 있을 것으로 추정됩니다.";
+}
+
+function renderMission(){
+  const current=data.expenses.delivery;
+  const baseline=200000;
+  const target=180000;
+  const reduction=Math.max(0,baseline-current);
+  const progress=pct(reduction/20000*100);
+
+  $("missionBar").style.width=
+    data.missionDone?"100%":progress+"%";
+
+  $("missionDesc").textContent=
+    "시연 시작 기준 20만 원인 배달음식 지출 계획을 "+
+    "18만 원 이하로 낮춰 보세요.";
+
+  $("missionStatus").textContent=
+    data.missionDone
+      ?"🏅 절약 계획 미션 성공! 200포인트를 받았습니다."
+      :"현재 배달음식 계획: "+won(current)+
+       " / 목표: "+won(target);
+
+  $("missionButton").disabled=data.missionDone;
+  $("missionButton").textContent=
+    data.missionDone
+      ?"🏆 미션 성공 완료"
+      :"✅ 절약 미션 완료하기";
+}
+
+function completeMission(){
+  if(data.missionDone)return;
+
+  if(!readInputs())return;
+
+  if(data.expenses.delivery>180000){
+    $("inputError").textContent=
+      "배달음식 지출 계획을 180,000원 이하로 변경한 다음 "+
+      "소비 분석 버튼을 눌러 주세요.";
+    $("inputError").scrollIntoView({
+      behavior:"smooth",block:"center"
+    });
+    return;
+  }
+
+  data.missionDone=true;
+  data.points+=200;
+
+  store();
+  renderAll();
+
+  openPopup(
+    "🐣✨",
+    "절약 미션 성공!",
+    "배달음식 월 지출 계획을 2만 원 이상 줄였습니다! "+
+    "200포인트와 절약 성공 배지를 획득했어요. "+
+    "머니메이트가 새로운 모습으로 진화했습니다!"
+  );
+}
+
+function renderCharacter(){
+  const points=data.points;
+
+  if(points>=200){
+    $("character").textContent="🐣";
+    $("characterName").textContent="성장한 머니메이트";
+    $("characterLevel").textContent="LEVEL 2";
+    $("characterMessage").textContent=
+      "와! 절약 습관이 나를 성장시켰어!";
+    $("characterBar").style.width="65%";
+    $("badges").innerHTML=
+      '<span class="badge">🏅 절약 성공 배지</span>';
+  }else{
+    $("character").textContent="🥚";
+    $("characterName").textContent="새싹 머니메이트";
+    $("characterLevel").textContent="LEVEL 1";
+    $("characterMessage").textContent=
+      "절약 미션에 성공하면 나도 성장해!";
+    $("characterBar").style.width="15%";
+    $("badges").innerHTML="";
+  }
+}
+
+function renderGoal(){
+  const progress=data.saved/data.goalTarget*100;
+  const remain=Math.max(0,data.goalTarget-data.saved);
+
+  $("goalTitle").textContent=data.goalName+" 모으기";
+  $("goalMoney").textContent=
+    won(data.saved)+" / "+won(data.goalTarget);
+  $("goalBar").style.width=pct(progress)+"%";
+  $("goalPercent").textContent=
+    progress.toFixed(1)+"% 달성";
+
+  const monthly=surplus();
+  const needed=monthly>0
+    ?Math.ceil(remain/monthly)
+    :null;
+
+  let text="";
+
+  if(remain===0){
+    text="🎉 저축 목표를 달성했습니다!";
+  }else if(monthly>0){
+    text="월 "+won(monthly)+"을 저축하면 "+
+      "현재 목표까지 약 "+needed+
+      "개월이 필요합니다. "+
+      "(소득과 지출이 유지된다고 가정)";
+  }else{
+    text="현재 소비 계획에는 저축 여력이 없습니다. "+
+      "지출 계획을 먼저 조정해 보세요.";
+  }
+
+  $("savingSuggestion").textContent=text;
+}
+
+function addSaving(){
+  const amount=readMoney("deposit",false);
+  $("savingError").textContent="";
+
+  if(!Number.isFinite(amount)){
+    $("savingError").textContent=
+      "1원 이상의 올바른 저축 금액을 입력해 주세요.";
+    return;
+  }
+
+  if(amount>remaining()){
+    $("savingError").textContent=
+      "현재 소비 계획에서 남은 저축 가능 금액은 "+
+      won(remaining())+"입니다.";
+    return;
+  }
+
+  if(amount>data.goalTarget-data.saved){
+    $("savingError").textContent=
+      "남은 저축 목표 금액을 초과할 수 없습니다.";
+    return;
+  }
+
+  data.saved+=amount;
+  $("deposit").value="";
+  store();
+  renderAll();
+
+  if(data.saved>=data.goalTarget){
+    openPopup(
+      "🏆",
+      "저축 목표 달성!",
+      data.goalName+" 목표 금액 "+
+      won(data.goalTarget)+"을 모두 모았습니다! "+
+      "축하합니다!"
+    );
+  }else{
+    openPopup(
+      "💰",
+      "저축 성공!",
+      won(amount)+"을 가상 저축했습니다. "+
+      "목표 달성 게이지가 상승했어요!"
+    );
+  }
+}
+
+function renderCoach(){
+  const tips=[];
+  const e=data.expenses;
+  const income=data.income;
+  const total=totalSpent();
+
+  if(income>0 && total>income){
+    tips.push([
+      "🚨 소비 구조 점검",
+      "현재 지출이 월 소득보다 많아요. "+
+      "필수 지출과 선택 지출을 나누어 예산을 조정해 보세요."
+    ]);
+  }
+
+  if(e.delivery>=180000){
+    tips.push([
+      "🍕 배달음식 소비 줄이기",
+      "월 배달음식 지출 "+won(e.delivery)+
+      "을 점검하고, 우선 2만 원을 줄이는 계획을 세워 보세요."
+    ]);
+  }
+
+  if(e.cafe>=100000){
+    tips.push([
+      "☕ 카페 지출 관리",
+      "현재 카페·간식 지출은 "+won(e.cafe)+
+      "입니다. 텀블러나 집에서 음료 만들기를 활용해 보세요."
+    ]);
+  }
+
+  if(e.shopping>=150000){
+    tips.push([
+      "🛍️ 충동구매 줄이기",
+      "쇼핑 전에 장바구니에 하루 보관하고 "+
+      "정말 필요한 물건인지 다시 확인해 보세요."
+    ]);
+  }
+
+  if(income>0 && total/income<=.7){
+    tips.push([
+      "🌱 좋은 저축 여력",
+      "현재 계획에서는 소득의 30% 이상이 남아요. "+
+      "비상금과 목표 저축을 나눠 관리해 보세요."
+    ]);
+  }
+
+  if(!tips.length){
+    tips.push([
+      "💜 균형 잡힌 소비 관리",
+      "매달 지출을 기록하고 저축 목표를 정기적으로 확인해 보세요."
+    ]);
+  }
+
+  const box=$("tips");
+  box.innerHTML="";
+
+  tips.forEach(([title,content])=>{
+    const div=document.createElement("div");
+    div.className="tip";
+
+    const heading=document.createElement("strong");
+    heading.textContent=title;
+
+    const p=document.createElement("p");
+    p.textContent=content;
+
+    div.append(heading,p);
+    box.appendChild(div);
+  });
+}
+
+function renderAlerts(){
+  const alerts=[];
+  const spent=totalSpent();
+
+  if(spent>data.budget){
+    alerts.push([
+      "🚨 월 소비 예산을 "+won(spent-data.budget)+
+      " 초과했습니다.",false
+    ]);
+  }else if(spent>=data.budget*.9){
+    alerts.push([
+      "⚠️ 소비 예산의 90% 이상 사용했습니다.",false
+    ]);
+  }else{
+    alerts.push([
+      "✅ 현재 소비 계획은 설정한 예산 안에 있습니다.",true
+    ]);
+  }
+
+  if(spent>data.income){
+    alerts.push([
+      "⚠️ 월 지출이 소득을 초과합니다. 저축 계획을 조정하세요.",false
+    ]);
+  }
+
+  if(data.expenses.delivery>180000 && !data.missionDone){
+    alerts.push([
+      "🍕 배달음식 지출 계획을 2만 원 줄이면 미션에 성공할 수 있어요.",false
+    ]);
+  }
+
+  if(data.missionDone){
+    alerts.push([
+      "🏅 배달음식 절약 계획 미션 완료! 200P 획득!",true
+    ]);
+  }
+
+  const box=$("alerts");
+  box.innerHTML="";
+
+  alerts.forEach(([message,good])=>{
+    const el=document.createElement("div");
+    el.className="alert"+(good?" good":"");
+    el.textContent=message;
+    box.appendChild(el);
+  });
+}
+
+// 규칙 기반 자연어 금융 질문 처리
+function answerQuestion(question){
+  const q=question.toLowerCase();
+  const total=totalSpent();
+
+  if(/저축|모으|얼마|적금/.test(q)){
+    return "💰 현재 월 소득은 "+won(data.income)+
+      ", 월 지출 계획은 "+won(total)+
+      "이에요. 예상 월 저축 여력은 "+won(surplus())+
+      "입니다. 먼저 비상금을 준비하고 "+
+      "목표에 맞춰 저축액을 정해 보세요.";
+  }
+
+  if(/배달|음식|외식/.test(q)){
+    return "🍕 현재 배달음식 지출 계획은 "+
+      won(data.expenses.delivery)+"이에요. "+
+      "20,000원을 줄여 "+won(Math.max(
+        0,data.expenses.delivery-20000
+      ))+"으로 계획해 보세요. "+
+      "배달 횟수를 줄이거나 직접 요리하는 방법도 좋아요.";
+  }
+
+  if(/예산|초과|관리/.test(q)){
+    const diff=data.budget-total;
+    return diff>=0
+      ?"📊 현재 설정한 소비 예산보다 "+won(diff)+
+       " 적게 지출할 계획이에요. "+
+       "주간 지출 한도를 정해 관리해 보세요."
+      :"🚨 현재 소비 예산을 "+won(-diff)+
+       " 초과했어요. 선택 지출부터 줄이고 "+
+       "필수 지출은 우선 확보하세요.";
+  }
+
+  if(/쇼핑|충동|구매/.test(q)){
+    return "🛍️ 쇼핑 지출 계획은 "+
+      won(data.expenses.shopping)+"이에요. "+
+      "구매 전 24시간 기다리기, 가격 비교, "+
+      "필요한 물건 목록 만들기를 추천해요.";
+  }
+
+  if(/목표|여행|달성/.test(q)){
+    return "🎯 현재 '"+data.goalName+
+      "' 목표는 "+won(data.goalTarget)+
+      "이고 "+won(data.saved)+"을 모았어요. "+
+      "남은 목표 금액은 "+
+      won(Math.max(0,data.goalTarget-data.saved))+
+      "입니다.";
+  }
+
+  return "💜 소비 습관을 이해하려는 좋은 질문이에요! "+
+    "현재 저는 저축, 배달음식, 쇼핑, 예산, "+
+    "목표 관리에 대한 질문에 답할 수 있어요. "+
+    "원하는 주제로 다시 질문해 주세요.";
+}
+
+function addBubble(text,mine){
+  const bubble=document.createElement("div");
+  bubble.className="bubble"+(mine?" mine":"");
+  bubble.textContent=text;
+  $("chat").appendChild(bubble);
+  $("chat").scrollTop=$("chat").scrollHeight;
+}
+
+function ask(text){
+  addBubble(text,true);
+  addBubble(answerQuestion(text),false);
+}
+
+function sendQuestion(){
+  const text=$("question").value.trim();
+  if(!text)return;
+  $("question").value="";
+  ask(text);
+}
+
+$("question").addEventListener("keydown",event=>{
+  if(event.key==="Enter")sendQuestion();
+});
+
+function openPopup(emoji,title,message){
+  $("popupEmoji").textContent=emoji;
+  $("popupTitle").textContent=title;
+  $("popupMessage").textContent=message;
+  $("popup").classList.add("show");
+}
+
+function closePopup(){
+  $("popup").classList.remove("show");
+}
+
+$("popup").addEventListener("click",event=>{
+  if(event.target===$("popup"))closePopup();
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape")closePopup();
+});
+
+function resetDemo(){
+  if(!confirm(
+    "모든 입력값과 미션, 저축 기록을 초기화하시겠습니까?"
+  ))return;
+
+  data=cloneDefaults();
+  store();
+  loadInputs();
+  $("inputError").textContent="";
+  $("savingError").textContent="";
+  $("deposit").value="";
+  $("chat").innerHTML="";
+  addBubble("안녕! 나는 머니메이트야 💜",false);
+  renderAll();
+}
+
+// 초기화
+createInputs();
+loadInputs();
+renderAll();
+</script>
+</body>
+</html>
